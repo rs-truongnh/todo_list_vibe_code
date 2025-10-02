@@ -1,0 +1,27 @@
+# Git attributes file to control line endings
+# Automatically normalize line endings to LF on checkin and prevent conversion on checkout
+
+# Set default behavior for all files
+* text=auto eol=lf
+
+# Specific file types
+*.md text eol=lf
+*.txt text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+
+# Windows specific files should use CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
