@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Todo Frontend (React + Material UI)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ứng dụng frontend cho dự án Todo, xây dựng bằng React 18 và Material UI, tích hợp xác thực JWT và dialog thêm công việc với Date/Time Picker.
 
-## Available Scripts
+## 🔧 Công nghệ
+- React 18, React Router
+- Material UI (@mui/material, @mui/icons-material)
+- @mui/x-date-pickers + date-fns
+- Axios (gọi API)
 
-In the project directory, you can run:
+## 🚀 Tính năng chính
+- Đăng nhập/Đăng ký với JWT (qua backend)
+- Màn hình Home với thống kê nhanh
+- Popup thêm công việc (AddTodoDialog) với Date/Time picker, priority, tags
+- Protected routes (chỉ vào được sau khi đăng nhập)
+- Tải lại danh sách todos sau khi tạo thành công
 
-### `npm start`
+## 📁 Cấu trúc thư mục (rút gọn)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+src/
+	components/
+		AddTodoDialog.js     # Dialog thêm công việc
+		Home.js              # Dashboard chính
+		Login.js, Register.js
+		ProtectedRoute.js
+	contexts/
+		SimpleAuthContext.js # Quản lý trạng thái đăng nhập đơn giản
+	services/
+		api.js               # Axios client + endpoints
+	App.js, index.js
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ⚙️ Biến môi trường
+Tạo file `.env` trong thư mục `todo-frontend/` với nội dung:
 
-### `npm test`
+```
+REACT_APP_API_URL=http://localhost:8888
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🏃 Cách chạy
 
-### `npm run build`
+1) Cài dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2) Chạy app dev (mặc định http://localhost:3000)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+Lưu ý: Hãy đảm bảo backend đang chạy ở cổng 8888 (hoặc cập nhật `REACT_APP_API_URL`).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 📦 Build production
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Output sẽ nằm trong thư mục `build/`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🔒 Xác thực
+- Lưu trữ token trong context (`SimpleAuthContext`)
+- Thêm `Authorization: Bearer <token>` cho các request qua `services/api.js`
+- Tự động reload todos sau khi tạo mới thành công
 
-## Learn More
+## 🧩 Thành phần chính
+- `AddTodoDialog`: Form tạo công việc, kiểm tra dữ liệu, chọn thời gian (DateTimePicker), tags, priority, status
+- `Home`: Hiển thị danh sách, thống kê, nút mở dialog (FAB + các nút nhanh)
+- `ProtectedRoute`: Chặn truy cập nếu chưa đăng nhập
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🐞 Troubleshooting
+- CORS: Nếu fetch lỗi, kiểm tra CORS ở backend
+- Token hết hạn: Đăng nhập lại hoặc triển khai refresh token (nếu có)
+- Hydration error tiêu đề dialog: Sử dụng text trực tiếp trong `DialogTitle` thay vì lồng `Typography` heading khác bên trong
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📄 License
+MIT
