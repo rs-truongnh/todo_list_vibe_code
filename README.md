@@ -213,6 +213,6 @@ Nếu gặp vấn đề, vui lòng:
 
 ---
 
-**Phát triển bởi**: [Your Name]
+**Phát triển bởi**: Copilot
 **Ngày tạo**: October 2025
 **Version**: 1.0.0
